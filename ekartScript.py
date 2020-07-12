@@ -56,6 +56,6 @@ if __name__ == "__main__":
             # break
         else:
             print('No updates')
-        time.sleep(15)
+        time.sleep(sleep_time)
 
 
