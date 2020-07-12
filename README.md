@@ -8,4 +8,5 @@ DeliveryNotify is a simple python script that checks for your delivery status pe
 
 ### TODO:
   - Add multiple logistics tracking mechanism
+  - Add options for command line arguments
   - Setting up of the script with env variables

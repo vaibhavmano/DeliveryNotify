@@ -34,6 +34,7 @@ if __name__ == "__main__":
     except:
         print('No time passed as param\nDefault time of 3 hours will be used.')
     print(sleep_time)
+    default_message = default_system_message = None
     while True:
         get_response = requests.get('https://ekartlogistics.com/track/{}/'.format(tracking_id))
         soup = BeautifulSoup(get_response.content, 'html.parser')
@@ -41,12 +42,20 @@ if __name__ == "__main__":
         table = soup.find_all('tr')
         message = table[3].text
         message = 'Last updated status: \n' + message
-        notify_bot(message)
-        try:
-            notify_systemos(system_message)
-        except:
-            print('Does not support your OS')
-        break
-        time.sleep(3*60*60)
+        if (default_message != message) and (default_system_message != system_message):
+            default_message = message
+            default_system_message = system_message
+            try:
+                notify_bot(message)
+            except:
+                print('No credentials for Telegram')
+            try:
+                notify_systemos(system_message)
+            except:
+                print('Does not support your OS')
+            # break
+        else:
+            print('No updates')
+        time.sleep(15)
 
 
